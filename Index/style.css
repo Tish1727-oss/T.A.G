@@ -92,6 +92,9 @@ body.dark-theme {
   font-family: "Playfair Display", serif;
   color: #D4AF37;
   font-size: 30px;
+  margin-left: -15px;
+  margin-top: -5px;
+  text-decoration: none;
 }
 
 .wc-nav ul {
@@ -107,6 +110,21 @@ body.dark-theme {
   color: var(--muted);
   cursor: pointer;
 }
+
+/* ---------- NAV HOVER EFFECT (GOLD, BOTH THEMES) ---------- */
+.wc-nav li:hover {
+  color: #D4AF37;              /* gold text */
+  border-bottom: 2px solid #D4AF37;
+  transition: all 0.3s ease;
+}
+
+/* Keep ACTIVE item styling even on hover */
+.wc-nav li.active,
+.wc-nav li.active:hover {
+  color: var(--text);
+  border-bottom: 2px solid var(--text);
+}
+
 
 .wc-nav li.active {
   color: var(--text);
@@ -221,3 +239,25 @@ footer {
   padding: 40px 0 60px;
   color: var(--muted);
 }
+
+body.dark-theme .card:hover h3 {
+  color: #D4AF37; /* gold */
+}
+
+/* Remove underlines from all nav items */
+.wc-nav li {
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Gold hover, no underline */
+.wc-nav li:hover {
+  color: #D4AF37;
+  transition: color 0.3s ease;
+}
+.wc-nav li.active {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
