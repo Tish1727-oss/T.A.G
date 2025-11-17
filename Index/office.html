@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T.A.G. – Office Wear</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .image-grid {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 6vw 80px;
+    }
+    .image-item {
+      text-align: center;
+    }
+    .image-item img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .image-item p {
+      margin-top: 8px;
+      font-family: "Playfair Display", serif;
+      font-size: 16px;
+      color: var(--text);
+    }
+    @media (max-width: 1200px) {
+      .image-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .image-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+
+  <header class="wc-header">
+    <div class="wc-logo">T.A.G.</div>
+  </header>
+
+  <!-- Hero Image -->
+
+  <div class="detail-hero">
+    <img src="https://images.unsplash.com/photo-1553788083-9d53a1b5b0a6?auto=format&fit=crop&w=1200&q=80" alt="Office Wear Hero" />
+  </div>
+
+  <h1 class="collections-title">Office Wear</h1>
+
+  <h2 class="grid-title">Our Office Wear Collection</h2>
+  <div class="image-grid">
+    <div class="image-item">
+      <img src="./images/office/1.jpg" alt="Office 1" />
+      <p>Classic Blazer</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/2.jpg" alt="Office 2" />
+      <p>White Shirt</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/3.jpg" alt="Office 3" />
+      <p>Formal Trousers</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/4.jpg" alt="Office 4" />
+      <p>Office Dress</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/5.jpg" alt="Office 5" />
+      <p>Formal Blouse</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/6.jpg" alt="Office 6" />
+      <p>Pencil Skirt</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/7.jpg" alt="Office 7" />
+      <p>Casual Blazer</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/8.jpg" alt="Office 8" />
+      <p>Striped Shirt</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/9.jpg" alt="Office 9" />
+      <p>Office Suit</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/10.jpg" alt="Office 10" />
+      <p>Formal Jacket</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/11.jpg" alt="Office 11" />
+      <p>Chic Blouse</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/12.jpg" alt="Office 12" />
+      <p>Pleated Skirt</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/13.jpg" alt="Office 13" />
+      <p>Office Coat</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/14.jpg" alt="Office 14" />
+      <p>Button Shirt</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/15.jpg" alt="Office 15" />
+      <p>Formal Pants</p>
+    </div>
+    <div class="image-item">
+      <img src="./images/office/16.jpg" alt="Office 16" />
+      <p>Elegant Blazer</p>
+    </div>
+  </div>
+
+</body>
+</html>
