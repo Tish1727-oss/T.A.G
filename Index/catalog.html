@@ -1,80 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="./images/logo/logo.png">
-  <title>Catalog – T.A.G</title>
+  <title>Catalog — T.A.G</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* RESET */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; overflow-x:hidden; }
+
+    :root {
+      --bg:#ffffff;
+      --text:#0f0f0f;
+      --muted:#555;
+      --gold:#D4AF37;
+      --card-shadow:0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family:"Inter",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    /* Theme Button */
+    .theme-toggle {
+      position:fixed; bottom:20px; right:20px;
+      padding:10px 16px; background:var(--bg); color:var(--text);
+      border:1px solid rgba(0,0,0,0.1); border-radius:8px;
+      cursor:pointer; z-index:4000; font-size:15px;
+    }
+
+    /* Header */
+    .wc-header {
+      padding:36px 8vw; display:flex; justify-content:space-between; align-items:center;
+    }
+
+    .wc-logo {
+      font-family:"Playfair Display",serif;
+      color:#D4AF37;
+      font-size:30px;
+      text-decoration:none;
+    }
+
+    .menu-toggle {
+      font-size:28px; background:none; border:none; color:var(--text);
+      cursor:pointer; z-index:5000;
+    }
+
+    /* Slide Menu */
+    .wc-menu {
+      position:fixed; top:0; right:-250px; width:250px; height:100%;
+      background:var(--bg); box-shadow:-4px 0 12px rgba(0,0,0,0.15);
+      transition:right 0.4s ease; padding-top:80px; z-index:4000;
+    }
+
+    .wc-menu.show { right:0; }
+
+    .wc-menu ul { list-style:none; }
+    .wc-menu li { margin:24px 0; text-align:center; }
+    .wc-menu a {
+      font-family:"Playfair Display",serif; font-size:22px; color:var(--text);
+      text-decoration:none; transition:color 0.3s ease;
+    }
+    .wc-menu a:hover { color:#D4AF37; }
+
+    /* Title */
+    h1 {
+      text-align:center; margin:50px 0 30px;
+      font-family:"Playfair Display", serif;
+      font-size:62px; color:var(--gold);
+      opacity:0; animation:fadeDown 1s ease forwards;
+    }
+
+    @keyframes fadeDown {
+      from { opacity:0; transform:translateY(-20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* ------------------------ */
+    /*     UPDATED GRID        */
+    /* ------------------------ */
+
+    .catalog-grid {
+      max-width:900px;
+      margin:40px auto 80px;
+      padding:0 6vw;
+      display:grid;
+      grid-template-columns:repeat(2, 1fr); /* ALWAYS 2 COLUMNS */
+      gap:40px;
+    }
+
+    @media (max-width: 600px) {
+      .catalog-grid {
+        grid-template-columns:1fr; /* 1 COLUMN ON PHONE */
+      }
+    }
+
+    /* Cards */
+    .catalog-card {
+      display:block; text-decoration:none; color:var(--text);
+      border-radius:14px; overflow:hidden; background:var(--bg);
+      box-shadow:var(--card-shadow);
+      opacity:0; transform:translateY(20px);
+      transition:.6s ease;
+    }
+
+    .catalog-card.visible {
+      opacity:1; transform:translateY(0);
+    }
+
+    .catalog-card img {
+      width:100%; height:330px; object-fit:cover;
+      transition:transform .6s ease;
+    }
+
+    .catalog-card:hover img { transform:scale(1.07); }
+
+    .catalog-info { padding:20px; text-align:center; }
+    .catalog-info h3 {
+      font-family:"Playfair Display",serif; font-size:26px;
+    }
+    .catalog-info span { font-size:15px; color:var(--muted); }
+
+    /* Footer */
+    .footer-section {
+      background:var(--bg);
+      padding:60px 6vw 20px;
+      border-top:1px solid rgba(0,0,0,0.08);
+    }
+
+    .footer-grid {
+      max-width:1200px; margin:auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+      gap:40px;
+    }
+
+    .footer-column h3 {
+      font-family:"Playfair Display",serif;
+      font-size:32px; color:var(--gold);
+      margin-bottom:12px;
+    }
+
+    .footer-column h4 {
+      font-family:"Playfair Display",serif;
+      font-size:22px; margin-bottom:15px;
+    }
+
+    .footer-column p, .footer-column a {
+      color:var(--muted); font-size:15px; text-decoration:none;
+    }
+
+    .footer-column a:hover { color:var(--gold); }
+    footer { text-align:center; padding:40px 0; color:var(--muted); }
+  </style>
+
 </head>
+
 <body>
 
 <!-- Theme Toggle -->
 <button class="theme-toggle" id="themeToggle">Dark</button>
 
-<!-- Splash (optional — remove if you only want it on home page) -->
-<div id="splash">T.A.G</div>
+<header class="wc-header">
+  <a href="index.html" class="wc-logo">T.A.G</a>
+  <button class="menu-toggle" id="menuToggle">☰</button>
 
-<div id="main-content">
+  <nav class="wc-menu" id="wcMenu">
+    <ul>
+      <li><a href="./catalog.html">Catalog</a></li>
+      <li><a href="./about.html">About Us</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Header -->
-  <header class="wc-header">
-    <a href="index.html" class="wc-logo">T.A.G</a>
-    <nav class="wc-nav">
-      <ul>
-        <li>Home</li>
-        <li class="active">Catalog</li>
-        <li>About Us</li>
-      </ul>
-    </nav>
-  </header>
+<h1 style="color: #0f0f0f;">Catalog</h1>
 
-  <h1 class="collections-title fade-up">Catalog</h1>
+<!-- Catalog Grid -->
+<div class="catalog-grid">
+  <a href="casual.html" class="catalog-card">
+    <img src="./images/casual.webp">
+    <div class="catalog-info">
+      <h3>Casual Collection</h3>
+      <span>Explore Everyday Elegance →</span>
+    </div>
+  </a>
 
-  <section class="collections-grid">
+  <a href="party.html" class="catalog-card">
+    <img src="./images/party.jpg">
+    <div class="catalog-info">
+      <h3>Party Collection</h3>
+      <span>Glam & Night Out Styles →</span>
+    </div>
+  </a>
 
-    <a href="office.html" class="card fade-up">
-      <div class="imgwrap">
-        <img src="./images/office.jpg">
-        <div class="overlay"><span>Explore →</span></div>
-      </div>
-      <h3>Office Wear</h3>
-    </a>
+  <a href="office.html" class="catalog-card">
+    <img src="./images/office.jpg">
+    <div class="catalog-info">
+      <h3>Office Collection</h3>
+      <span>Professional & Modern Wear →</span>
+    </div>
+  </a>
 
-    <a href="casual.html" class="card fade-up">
-      <div class="imgwrap">
-        <img src="./images/casual.webp">
-        <div class="overlay"><span>Explore →</span></div>
-      </div>
-      <h3>Casual Wear</h3>
-    </a>
-
-    <a href="party.html" class="card fade-up">
-      <div class="imgwrap">
-        <img src="./images/party.jpg">
-        <div class="overlay"><span>Explore →</span></div>
-      </div>
-      <h3>Party Wear</h3>
-    </a>
-
-    <a href="traditional.html" class="card fade-up">
-      <div class="imgwrap">
-        <img src="./images/traditional.jpeg">
-        <div class="overlay"><span>Explore →</span></div>
-      </div>
-      <h3>Traditional Wear</h3>
-    </a>
-
-  </section>
-
-  <footer>
-    <p>© 2025 T.A.G | Crafted With Elegance</p>
-  </footer>
-
+  <a href="traditional.html" class="catalog-card">
+    <img src="./images/traditional.jpeg">
+    <div class="catalog-info">
+      <h3>Traditional Collection</h3>
+      <span>Heritage & Cultural Designs →</span>
+    </div>
+  </a>
 </div>
 
-<script src="script.js"></script>
+<!-- Footer -->
+<div class="footer-section">
+  <div class="footer-grid">
+
+    <div class="footer-column">
+      <h3>T.A.G</h3>
+      <p>Elegance Redefined — curated collections crafted for the modern woman.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="casual.html">Casual Wear</a></li>
+        <li><a href="party.html">Party Wear</a></li>
+        <li><a href="office.html">Office Wear</a></li>
+        <li><a href="traditional.html">Traditional Wear</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:contact@tagfashion.com">contact@tagfashion.com</a></p>
+      <p>Phone: +1 800 123 4567</p>
+      <p>Location: Colombo, Sri Lanka</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Pinterest</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 T.A.G | Crafted With Elegance</p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* MENU SYSTEM */
+  const menuToggle = document.getElementById("menuToggle");
+  const wcMenu = document.getElementById("wcMenu");
+
+  menuToggle.addEventListener("click", () => {
+    wcMenu.classList.toggle("show");
+  });
+
+  wcMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => wcMenu.classList.remove("show"));
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!wcMenu.contains(e.target) && e.target !== menuToggle) {
+      wcMenu.classList.remove("show");
+    }
+  });
+
+  /* Fade-in Animation */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll(".catalog-card").forEach(card => observer.observe(card));
+});
+</script>
+
 </body>
 </html>

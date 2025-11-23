@@ -45,3 +45,49 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".fade-up, .card").forEach(el =>
   observer.observe(el)
 );
+
+
+// HAMBURGER MENU
+const menuToggle = document.getElementById("menuToggle");
+const wcMenu = document.getElementById("wcMenu");
+
+menuToggle.addEventListener("click", () => {
+  wcMenu.classList.toggle("show");
+});
+
+// Close menu when clicking a link
+wcMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    wcMenu.classList.remove("show");
+  });
+});
+
+// Close menu if clicking outside
+document.addEventListener("click", (e) => {
+  if (!wcMenu.contains(e.target) && e.target !== menuToggle) {
+    wcMenu.classList.remove("show");
+  }
+});
+
+
+// ----------------------------------------------------
+// PAGE TRANSITION (BLACK SCREEN + SHIMMERING T.A.G)
+// ----------------------------------------------------
+
+const transitionScreen = document.getElementById("page-transition");
+
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", (e) => {
+    if (!link.href || link.href === window.location.href) return;
+
+    e.preventDefault();
+
+    // Show black transition screen
+    transitionScreen.classList.add("active");
+    document.body.classList.add("page-loading");
+
+    setTimeout(() => {
+      window.location.href = link.href;
+    }, 3000); // 3 seconds shimmer
+  });
+});
