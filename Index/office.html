@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>T.A.G. — Office Wear</title>
+  <link rel="icon" href="./images/logo/logo3.png">
+  <title>T.A.G — Office Wear</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     /* RESET */
@@ -75,6 +75,64 @@
     }
     @media (max-width: 700px) {
       .image-grid { grid-template-columns: 1fr; }
+    }
+    .footer-section {
+  background: var(--bg);
+  padding: 60px 6vw 20px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 40px;
+}
+
+.footer-column h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+.footer-column h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: var(--text);
+}
+
+.footer-column p,
+.footer-column a {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-decoration: none;
+}
+
+.footer-column ul {
+  list-style:none;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column a:hover {
+  color: var(--gold);
+}
+
+.socials li a {
+  font-size: 15px;
+}
+:root {
+      --bg:#ffffff; 
+      --text:#0f0f0f; 
+      --muted:#555; 
+      --gold:#D4AF37;
+      --card-shadow:0 6px 20px rgba(0,0,0,0.08);
     }
   </style>
 </head>
@@ -153,12 +211,53 @@
     </div>
   </div>
 
-  <footer>
-      <p>© 2025 T.A.G | Crafted With Elegance</p>
-    </footer>
+  <div class="footer-section">
+
+  <div class="footer-grid">
+
+    <div class="footer-column">
+      <h3>T.A.G</h3>
+      <p>Elegance Redefined — Explore curated collections crafted for the modern woman.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="casual.html">Casual Wear</a></li>
+        <li><a href="party.html">Party Wear</a></li>
+        <li><a href="office.html">Office Wear</a></li>
+        <li><a href="traditional.html">Traditional Wear</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:contact@tagfashion.com">contact@tagfashion.com</a></p>
+      <p>Phone: +94 705 312 382 <br> 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+94 711 479 102</p>
+      <p>Location: Colombo, Sri Lanka</p>
+
+    </div>
+
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <ul class="socials">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Pinterest</a></li>
+      </ul>
+    </div>
 
   </div>
 
+</div>
 
+  <footer>
+    <p>© 2025 T.A.G | Crafted With Elegance</p>
+  </footer>
+
+</div>
 </body>
 </html>
