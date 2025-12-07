@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="./images/logo/logo3.png">
+  <title>T.A.G | Sign Up</title>
+
+  <style>
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow-x:hidden; }
+
+:root {
+  --bg:#ffffff;
+  --text:#0f0f0f;
+  --muted:#555;
+  --gold:#D4AF37;
+  --card-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family:"Inter",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+body.light-theme { --bg:#f7f4f2; --text:#1a1a1a; --muted:#666; }
+body.dark-theme  { --bg:#0e0e0e; --text:#f5f5f5; --muted:#bdbdbd; }
+
+/* THEME TOGGLE */
+.theme-toggle {
+  position:fixed; bottom:20px; right:20px;
+  padding:10px 16px; background:var(--bg); color:var(--text);
+  border:1px solid rgba(0,0,0,0.1); border-radius:8px;
+  cursor:pointer; z-index:4000; font-size:15px;
+}
+
+/* HEADER */
+.wc-header {
+  width: 100%;
+  padding: 26px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* LINKS */
+.navbar > a {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+.navbar > a:hover { color: var(--gold); }
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: -60px;
+  list-style: none; 
+  background: #FEF8DE;
+  border-radius: 10px;
+  padding: 10px 25px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+  min-width: 220px;
+}
+.dropdown-menu li a {
+  display: block;
+  padding: 5px 20px;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* SEARCH */
+.searchbox input {
+  padding: 8px 14px;
+  font-size: 16px;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 20px;
+  width: 170px;
+}
+.searchbox input:focus {
+  border-color: var(--gold);
+  outline: none;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+}
+
+/* USER ICON DROPDOWN */
+.nav-user-icon img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.nav-user-icon:hover img {
+  filter: brightness(0) saturate(100%) invert(67%) sepia(69%) saturate(405%) hue-rotate(2deg) brightness(93%) contrast(92%);
+  transform: scale(1.08);
+}
+.user-dropdown { position: relative; }
+.user-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  list-style: none;
+  background: #FEF8DE;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 150px;
+}
+.user-menu li a {
+  display: block;
+  padding: 8px 0;
+  font-size: 16px;
+  color: var(--text) !important;
+  text-decoration: none;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+.user-menu li a:hover { color: var(--gold) !important; }
+.user-dropdown.active .user-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* SIGNUP FORM */
+.signup-section {
+  max-width: 450px;
+  margin: 80px auto 100px;
+  padding: 40px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+.signup-section h2 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: var(--text);
+}
+.signup-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.signup-section input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.signup-section input:focus {
+  border-color: var(--gold);
+  outline: none;
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+}
+.signup-section button {
+  padding: 12px 16px;
+  background: var(--gold);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.signup-section button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* FOOTER */
+.footer-section {
+  background: var(--bg);
+  padding: 60px 6vw 20px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.footer-grid {
+  max-width:1200px; margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:40px;
+}
+.footer-column h3 {
+  font-family:"Playfair Display"; font-size:32px;
+  color:var(--gold);
+}
+.footer-column h4 {
+  font-family:"Playfair Display"; font-size:22px;
+  margin-bottom:15px; color:var(--text);
+}
+.footer-column a { color:var(--muted); text-decoration:none; }
+.footer-column a:hover { color:var(--gold); }
+
+footer {
+  text-align:center; padding:40px 0; color:var(--muted);
+}
+
+/* RESPONSIVE */
+@media(max-width: 600px){
+  .signup-section { margin:40px 20px; padding:30px; }
+  .navbar { gap:12px; }
+  .searchbox input { width:120px; }
+}
+.wc-logo {
+font-family:"Playfair Display",serif;
+color:#D4AF37;
+font-size:30px;
+text-decoration:none;
+}
+.catalog{
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+.dropdown > a:hover {
+  color:#D4AF37;
+}
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle">Dark</button>
+
+<!-- HEADER -->
+<header class="wc-header">
+  <a href="index.html" class="wc-logo">T.A.G</a>
+
+<nav class="navbar">
+
+    <div class="dropdown">
+      <a class="catalog" href="#">Catalog</a>
+      <ul class="dropdown-menu">
+        <li><a style="text-decoration: none;" href="office.html">Office Attire</a></li>
+        <li><a style="text-decoration: none;" href="casual.html">Casual Wear</a></li>
+        <li><a style="text-decoration: none;" href="party.html">Party Wear</a></li>
+        <li><a style="text-decoration: none;" href="traditional.html">Traditional Wear</a></li>
+      </ul>
+    </div>
+
+    <a href="contact.html">Contact Us</a>
+    <a href="about.html">About Us</a>
+</a>
+
+
+    <div class="searchbox">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="user-dropdown">
+    <a href="#" class="nav-user-icon">
+      <img src="./images/accoun t_icon.svg" alt="User">
+    </a>
+
+    <ul class="user-menu">
+      <li><a href="/Index/login.html">Login</a></li>
+      <li><a href="/Index/signup.html">Sign Up</a></li>
+    </ul>
+</div>
+
+  </nav>
+</header>
+
+
+<!-- SIGNUP FORM -->
+<section class="signup-section">
+  <h2>Create Account</h2>
+  <form action="/signup" method="POST">
+    <input type="text" placeholder="Full Name" name="name" required>
+    <input type="email" placeholder="Email Address" name="email" required>
+    <input type="password" placeholder="Password" name="password" required>
+    <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-section">
+  <div class="footer-grid">
+    <div class="footer-column">
+      <h3>T.A.G</h3>
+      <p>Elegance Redefined — Explore curated collections crafted for the modern woman.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="casual.html">Casual Wear</a></li>
+        <li><a href="party.html">Party Wear</a></li>
+        <li><a href="office.html">Office Wear</a></li>
+        <li><a href="traditional.html">Traditional Wear</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:contact@tagfashion.com">contact@tagfashion.com</a></p>
+      <p>Phone: +94 705 312 382<br>+94 711 479 102</p>
+      <p>Location: Colombo, Sri Lanka</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Pinterest</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 T.A.G | Crafted With Elegance</p>
+</footer>
+
+<!-- JS -->
+<script>
+/* THEME TOGGLE */
+document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark-theme");
+  themeToggle.textContent = document.body.classList.contains("dark-theme") ? "Light" : "Dark";
+});
+
+/* DROPDOWN */
+const dropdown = document.querySelector(".dropdown");
+const dropdownToggle = dropdown.querySelector("a");
+dropdownToggle.addEventListener("click", e => {
+  e.preventDefault();
+  dropdown.classList.toggle("active");
+});
+document.addEventListener("click", e => {
+  if(!dropdown.contains(e.target)) dropdown.classList.remove("active");
+});
+
+/* USER DROPDOWN */
+const userDropdown = document.querySelector(".user-dropdown");
+const userIcon = document.querySelector(".nav-user-icon");
+userIcon.addEventListener("click", e => {
+  e.preventDefault();
+  userDropdown.classList.toggle("active");
+});
+document.addEventListener("click", e => {
+  if(!userDropdown.contains(e.target)) userDropdown.classList.remove("active");
+});
+</script>
+
+</body>
+</html>

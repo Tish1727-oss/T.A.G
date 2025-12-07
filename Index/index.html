@@ -104,14 +104,6 @@ body.dark-theme  { --bg:#0e0e0e; --text:#f5f5f5; --muted:#bdbdbd; }
   min-width: 220px; /* or bigger if needed */
 }
 
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
-  opacity: 1;           /* FULL visibility */
-  transform: translateY(0);
-  pointer-events: auto;
-  color: var(--gold); 
-}
-  .dropdown-menu :hover { color: var(--gold); }
 
 
 /* SEARCH */
@@ -308,6 +300,132 @@ text-decoration:none;
   white-space: nowrap;      /* keep text in one line */
   transition: color 0.3s ease;
 }
+/* CLICK-BASED DROPDOWN OPEN STATE */
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-user-icon img {
+  width: 30px;         
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* turn gold when hovered */
+.nav-user-icon:hover img {
+  filter: brightness(0) saturate(100%) 
+          invert(67%) sepia(69%) saturate(405%) 
+          hue-rotate(2deg) brightness(93%) contrast(92%);
+  transform: scale(1.08);
+}
+/* USER ICON */
+.nav-user-icon img {
+  width: 30px; 
+  height: 30px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.nav-user-icon:hover img {
+  transform: scale(1.1);
+}
+
+/* USER DROPDOWN CONTAINER */
+.user-dropdown {
+  position: relative;
+}
+
+/* DROPDOWN MENU */
+.user-menu {
+  position: absolute;
+  top: 110%;
+  right: -10px;
+  list-style: none;
+
+  background: #FEF8DE;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 120px;
+  z-index: 10;
+}
+
+/* Show when active */
+.user-dropdown.active .user-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  margin-right: -45px;
+}
+
+/* USER DROPDOWN — FIXED HOVER / FOCUS / VISITED BEHAVIOR */
+/* USER DROPDOWN — FIXED HOVER / FOCUS / VISITED BEHAVIOR */
+.user-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  list-style: none;
+
+  background: #FEF8DE;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 150px;
+}
+
+/* ensure anchors fill the clickable area and have consistent base color */
+.user-menu li {
+  margin: 0;
+}
+.user-menu li a {
+  display: block;                 /* full-width hover area */
+  padding: 8px 0;                 /* vertical spacing */
+  font-size: 16px;
+  color: var(--text) !important;  /* make base color explicit */
+  text-decoration: none;
+  transition: color 0.18s ease, background 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* visited/active states should keep readable color — override if needed */
+.user-menu li a:visited {
+  color: var(--text);
+}
+
+/* Hover / focus / active — GUARANTEED to turn gold */
+.user-menu li a:hover,
+.user-menu li a:focus,
+.user-menu li a:active {
+  color: var(--gold) !important;
+  outline: none;
+}
+
+/* show menu */
+.user-dropdown.active .user-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.dropdown-menu:hover { color: var(--gold); }
+
+
+
+
+
 </style>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -325,7 +443,6 @@ text-decoration:none;
 <div id="main-content">
 
   <!-- HEADER -->
- <!-- HEADER -->
 <header class="wc-header">
 
   <a href="index.html" class="wc-logo">T.A.G</a>
@@ -335,19 +452,31 @@ text-decoration:none;
     <div class="dropdown">
       <a class="catalog" href="#">Catalog</a>
       <ul class="dropdown-menu">
-        <li><a style="text-decoration: none;   font-size: 18px; text-decoration: none;color: var(--text);transition: color 0.3s ease;" href="office.html">Office Attire</a></li>
-        <li><a style="text-decoration: none;   font-size: 18px; text-decoration: none;color: var(--text);transition: color 0.3s ease;" href="casual.html">Casual Wear</a></li>
-        <li><a style="text-decoration: none;   font-size: 18px; text-decoration: none;color: var(--text);transition: color 0.3s ease;" href="party.html">Party Wear</a></li>
-        <li><a style="text-decoration: none;   font-size: 18px; text-decoration: none;color: var(--text);transition: color 0.3s ease;" href="traditional.html">Traditional Dresses</a></li>
+        <li><a style="text-decoration: none;" href="office.html">Office Attire</a></li>
+        <li><a style="text-decoration: none;" href="casual.html">Casual Wear</a></li>
+        <li><a style="text-decoration: none;" href="party.html">Party Wear</a></li>
+        <li><a style="text-decoration: none;" href="traditional.html">Traditional Wear</a></li>
       </ul>
     </div>
 
     <a href="contact.html">Contact Us</a>
     <a href="about.html">About Us</a>
+</a>
+
 
     <div class="searchbox">
       <input type="text" placeholder="Search...">
     </div>
+    <div class="user-dropdown">
+    <a href="#" class="nav-user-icon">
+      <img src="./images/accoun t_icon.svg" alt="User">
+    </a>
+
+    <ul class="user-menu">
+      <li><a href="/Index/login.html">Login</a></li>
+      <li><a href="/Index/signup.html">Sign Up</a></li>
+    </ul>
+</div>
 
   </nav>
 
@@ -496,6 +625,39 @@ links.forEach(link => {
 
 /* OPTIONAL SCROLL TOP */
 window.onbeforeunload = function () { window.scrollTo(0, 0); };
+/* CLICKABLE DROPDOWN */
+const dropdown = document.querySelector(".dropdown");
+const dropdownToggle = dropdown.querySelector("a"); // the "Catalog" link
+const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+
+// Prevent link navigation for catalog
+dropdownToggle.addEventListener("click", (e) => {
+  e.preventDefault();
+  dropdown.classList.toggle("active");
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target)) {
+    dropdown.classList.remove("active");
+  }
+});
+/* USER ICON CLICK DROPDOWN */
+const userDropdown = document.querySelector(".user-dropdown");
+const userIcon = document.querySelector(".nav-user-icon");
+
+userIcon.addEventListener("click", (e) => {
+  e.preventDefault();
+  userDropdown.classList.toggle("active");
+});
+
+// Close when clicking outside
+document.addEventListener("click", (e) => {
+  if (!userDropdown.contains(e.target)) {
+    userDropdown.classList.remove("active");
+  }
+});
+
 </script>
 
 </body>
