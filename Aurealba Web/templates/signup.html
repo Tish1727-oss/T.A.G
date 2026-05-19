@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}AUREALBA | Sign Up{% endblock %}
+
+{% block splash %}<div id="splash">AUREALBA</div>{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+    <nav class="wc-nav">
+      <ul>
+        <li><a href="{{ url_for('catalog') }}">Catalog</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="signup-section">
+    <h2>Create Account</h2>
+    <form action="{{ url_for('signup') }}" method="POST">
+      <input type="text"     name="name"             placeholder="Full Name"         required>
+      <input type="email"    name="email"            placeholder="Email Address"     required>
+      <input type="password" name="password"         placeholder="Password"          required>
+      <input type="password" name="confirm_password" placeholder="Confirm Password"  required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p style="text-align:center;margin-top:16px;font-size:15px;">
+      Already have an account? <a href="{{ url_for('login') }}" style="color:#D4AF37;">Login</a>
+    </p>
+  </section>
+</div>
+{% endblock %}

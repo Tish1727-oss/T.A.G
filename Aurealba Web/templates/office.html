@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Office Wear — AUREALBA{% endblock %}
+{% block body %}
+<header class="wc-header">
+  <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+</header>
+<h1 class="collections-title">Office Wear</h1>
+<div class="detail-hero">
+  <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1200&q=80" alt="Office Wear">
+</div>
+<div class="products-grid" id="products-grid"></div>
+{% endblock %}
+{% block extra_css %}
+<style>
+.detail-hero{width:100%;max-width:1200px;margin:0 auto 60px;aspect-ratio:16/9;overflow:hidden;border-radius:12px;}
+.detail-hero img{width:100%;height:100%;object-fit:cover;}
+</style>
+{% endblock %}
+{% block extra_js %}
+<script>
+const COLLECTION = "Office Wear";
+const COLLECTION_KEY = "office";
+const PRODUCTS = [
+  {name:"Classic Tailored Blazer", price:7800,  sizes:["XS","S","M","L","XL"],  emoji:"👔", description:"A sharp tailored blazer in a timeless cut. Structured shoulders project confidence in any boardroom."},
+  {name:"Structured Pencil Skirt", price:3500,  sizes:["XS","S","M","L"],       emoji:"👗", description:"A classic pencil skirt with structured fabric and comfortable stretch. A wardrobe essential."},
+  {name:"Silk Button-Down Blouse", price:4200,  sizes:["S","M","L","XL"],       emoji:"👚", description:"A refined silk button-down blouse with a polished finish. Elevates any work outfit with luxury."},
+  {name:"Wide-Leg Trousers",       price:4800,  sizes:["S","M","L","XL","XXL"], emoji:"👖", description:"Sophisticated wide-leg trousers in premium fabric. Flattering and comfortable for long work days."},
+  {name:"Power Suit Co-ord Set",   price:11500, sizes:["S","M","L","XL"],       emoji:"💼", description:"A commanding power suit co-ord set that means business. Perfectly matched jacket and trousers."},
+  {name:"Shift Dress Navy",        price:5200,  sizes:["XS","S","M","L","XL"],  emoji:"👗", description:"A timeless navy shift dress with clean lines and a modest hem. Versatile and professional."},
+];
+</script>
+<script src="{{ url_for('static', filename='collection.js') }}"></script>
+{% endblock %}

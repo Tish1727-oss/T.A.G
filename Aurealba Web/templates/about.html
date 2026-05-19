@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}About Us — AUREALBA{% endblock %}
+
+{% block splash %}<div id="splash">AUREALBA</div>{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+    <nav class="wc-nav">
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('catalog') }}">Catalog</a></li>
+        <li class="active">About Us</li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1 class="collections-title fade-up">About Us</h1>
+
+  <section style="max-width:900px;margin:auto;padding:0 6vw 80px;">
+    <p class="fade-up" style="font-size:20px;line-height:1.7;margin-bottom:20px;">
+      At <strong>AUREALBA</strong>, we believe elegance is timeless.
+      Our collections are crafted with precision, passion, and an obsession for detail.
+    </p>
+    <p class="fade-up" style="font-size:20px;line-height:1.7;margin-bottom:20px;">
+      From bold party outfits to refined office wear, each piece is designed to elevate your
+      confidence and style. We merge fashion and artistry, blending classic aesthetics with
+      modern sophistication.
+    </p>
+    <p class="fade-up" style="font-size:20px;line-height:1.7;">
+      Thank you for choosing <strong>AUREALBA</strong>. Your elegance is our inspiration.
+    </p>
+  </section>
+</div>
+{% endblock %}

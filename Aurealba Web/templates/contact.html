@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Contact Us — AUREALBA{% endblock %}
+
+{% block splash %}<div id="splash">AUREALBA</div>{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+    <nav class="wc-nav">
+      <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('catalog') }}">Catalog</a></li>
+        <li class="active">Contact Us</li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1 class="collections-title fade-up">Contact Us</h1>
+
+  <section class="signup-section" style="max-width:520px;">
+    <h2>Get in Touch</h2>
+    <form action="{{ url_for('contact') }}" method="POST" style="display:flex;flex-direction:column;gap:20px;">
+      <input type="text"  name="name"    placeholder="Your Name"    required>
+      <input type="email" name="email"   placeholder="Your Email"   required>
+      <textarea name="message" placeholder="Your Message" rows="5"
+                style="padding:12px 16px;font-size:16px;border-radius:8px;border:1px solid rgba(0,0,0,0.2);resize:vertical;" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Catalog — AUREALBA{% endblock %}
+
+{% block body %}
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav class="wc-menu" id="wcMenu">
+      <ul>
+        <li><a href="{{ url_for('catalog') }}">Catalog</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1 style="text-align:center;margin:50px 0 30px;font-family:'Playfair Display',serif;font-size:62px;">Catalog</h1>
+
+  <div class="catalog-grid">
+    <a href="{{ url_for('casual') }}" class="catalog-card">
+      <img src="{{ url_for('static', filename='images/casual.webp') }}" alt="Casual">
+      <div class="catalog-info"><h3>Casual Collection</h3><span>Explore Everyday Elegance →</span></div>
+    </a>
+    <a href="{{ url_for('party') }}" class="catalog-card">
+      <img src="{{ url_for('static', filename='images/party.jpg') }}" alt="Party">
+      <div class="catalog-info"><h3>Party Collection</h3><span>Glam & Night Out Styles →</span></div>
+    </a>
+    <a href="{{ url_for('office') }}" class="catalog-card">
+      <img src="{{ url_for('static', filename='images/office.jpg') }}" alt="Office">
+      <div class="catalog-info"><h3>Office Collection</h3><span>Professional & Modern Wear →</span></div>
+    </a>
+    <a href="{{ url_for('traditional') }}" class="catalog-card">
+      <img src="{{ url_for('static', filename='images/traditional.jpeg') }}" alt="Traditional">
+      <div class="catalog-info"><h3>Traditional Collection</h3><span>Heritage & Cultural Designs →</span></div>
+    </a>
+  </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.catalog-grid {
+  max-width:900px; margin:40px auto 80px; padding:0 6vw;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:40px;
+}
+@media(max-width:600px){ .catalog-grid { grid-template-columns:1fr; } }
+.catalog-card {
+  display:block; text-decoration:none; color:var(--text);
+  border-radius:14px; overflow:hidden; background:var(--bg);
+  box-shadow:var(--card-shadow); opacity:0; transform:translateY(20px); transition:.6s ease;
+}
+.catalog-card.visible { opacity:1; transform:translateY(0); }
+.catalog-card img { width:100%; height:330px; object-fit:cover; transition:transform .6s ease; }
+.catalog-card:hover img { transform:scale(1.07); }
+.catalog-info { padding:20px; text-align:center; }
+.catalog-info h3 { font-family:"Playfair Display",serif; font-size:26px; }
+.catalog-info span { font-size:15px; color:var(--muted); }
+</style>
+{% endblock %}

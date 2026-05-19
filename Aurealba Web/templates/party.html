@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Party Wear — AUREALBA{% endblock %}
+{% block body %}
+<header class="wc-header">
+  <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+</header>
+<h1 class="collections-title">Party Wear</h1>
+<div class="detail-hero">
+  <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="Party Wear">
+</div>
+<div class="products-grid" id="products-grid"></div>
+{% endblock %}
+{% block extra_css %}
+<style>
+.detail-hero{width:100%;max-width:1200px;margin:0 auto 60px;aspect-ratio:16/9;overflow:hidden;border-radius:12px;}
+.detail-hero img{width:100%;height:100%;object-fit:cover;}
+</style>
+{% endblock %}
+{% block extra_js %}
+<script>
+const COLLECTION = "Party Wear";
+const COLLECTION_KEY = "party";
+const PRODUCTS = [
+  {name:"Sequin Evening Gown",   price:8500, sizes:["XS","S","M","L"],       emoji:"👘", description:"Turn heads in this dazzling sequin evening gown. Full-length glamour designed for unforgettable nights."},
+  {name:"Velvet Wrap Dress",     price:6200, sizes:["S","M","L","XL"],       emoji:"👗", description:"A luxurious velvet wrap dress in a deep jewel tone. The draped neckline creates an elegant look."},
+  {name:"Embellished Crop Top",  price:3400, sizes:["XS","S","M","L"],       emoji:"✨", description:"A show-stopping embellished crop top covered in intricate beading for a glamorous ensemble."},
+  {name:"Satin Slip Dress",      price:5800, sizes:["XS","S","M","L","XL"],  emoji:"👗", description:"A sleek satin slip dress with a fluid silhouette. Minimalist glamour for cocktail events."},
+  {name:"Ruffle Cocktail Dress", price:7200, sizes:["S","M","L"],            emoji:"👗", description:"A flirty ruffle cocktail dress with layers of cascading fabric. Perfect for celebrations."},
+  {name:"Glitter Blazer Set",    price:9000, sizes:["S","M","L","XL"],       emoji:"🥂", description:"A bold glitter blazer co-ord set that makes a statement. Wear together for maximum impact."},
+];
+</script>
+<script src="{{ url_for('static', filename='collection.js') }}"></script>
+{% endblock %}

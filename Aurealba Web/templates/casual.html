@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Casual Wear — AUREALBA{% endblock %}
+{% block body %}
+<header class="wc-header">
+  <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+</header>
+<h1 class="collections-title">Casual Wear</h1>
+<div class="detail-hero">
+  <img src="https://images.unsplash.com/photo-1553788083-9d53a1b5b0a6?auto=format&fit=crop&w=1200&q=80" alt="Casual Wear">
+</div>
+<div class="products-grid" id="products-grid"></div>
+{% endblock %}
+{% block extra_css %}
+<style>
+.detail-hero{width:100%;max-width:1200px;margin:0 auto 60px;aspect-ratio:16/9;overflow:hidden;border-radius:12px;}
+.detail-hero img{width:100%;height:100%;object-fit:cover;}
+</style>
+{% endblock %}
+{% block extra_js %}
+<script>
+const COLLECTION = "Casual Wear";
+const COLLECTION_KEY = "casual";
+const PRODUCTS = [
+  {name:"Linen Breeze Dress",   price:3800, sizes:["XS","S","M","L","XL"],      emoji:"👗", description:"A breathable linen dress perfect for warm days. Effortlessly stylish for brunch, errands, or casual outings."},
+  {name:"Stripe Wrap Top",      price:2200, sizes:["S","M","L","XL"],            emoji:"👚", description:"A versatile stripe wrap top that pairs beautifully with jeans or trousers with an adjustable tie waist."},
+  {name:"Relaxed Palazzo Set",  price:4500, sizes:["S","M","L","XL","XXL"],      emoji:"👗", description:"A coordinated palazzo set in flowing fabric. Effortlessly chic for day-to-night dressing."},
+  {name:"Floral Midi Skirt",    price:2900, sizes:["XS","S","M","L"],            emoji:"👗", description:"A feminine floral midi skirt with a flattering A-line cut. Perfect for spring and summer styling."},
+  {name:"Cotton Crop Blouse",   price:1800, sizes:["S","M","L"],                 emoji:"👕", description:"A lightweight cotton crop blouse with delicate detailing. Pairs with high-waist bottoms effortlessly."},
+  {name:"Casual Knit Cardigan", price:3200, sizes:["S","M","L","XL"],            emoji:"🧥", description:"A cosy knit cardigan in a neutral tone. Layer over any outfit for a warm, stylish finish."},
+];
+</script>
+<script src="{{ url_for('static', filename='collection.js') }}"></script>
+{% endblock %}

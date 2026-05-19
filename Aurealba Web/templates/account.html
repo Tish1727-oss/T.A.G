@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block title %}AUREALBA | My Account{% endblock %}
+
+{% block splash %}<div id="splash">AUREALBA</div>{% endblock %}
+
+{% block extra_css %}
+<style>
+  .account-page {
+    max-width: 900px;
+    margin: 50px auto 100px;
+    padding: 0 6vw;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .account-page { grid-template-columns: 1fr; }
+  }
+
+  /* SIDEBAR */
+  .account-sidebar {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    padding: 36px 24px;
+    text-align: center;
+    position: sticky;
+    top: 30px;
+  }
+  .avatar-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 16px;
+  }
+  .avatar-wrap img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #D4AF37;
+  }
+  .avatar-edit-btn {
+    position: absolute;
+    bottom: 4px; right: 4px;
+    width: 32px; height: 32px;
+    background: #D4AF37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid #fff;
+    transition: transform 0.2s ease;
+  }
+  .avatar-edit-btn:hover { transform: scale(1.1); }
+  .avatar-edit-btn svg { width: 15px; height: 15px; fill: #fff; }
+  #avatarInput { display: none; }
+
+  .sidebar-name {
+    font-family: "Playfair Display", serif;
+    font-size: 22px; font-weight: 700;
+    margin-bottom: 4px; color: #0f0f0f;
+  }
+  .sidebar-email { font-size: 14px; color: #888; margin-bottom: 20px; }
+  .sidebar-badge {
+    display: inline-block;
+    background: #FEF8DE; color: #D4AF37;
+    font-size: 13px; padding: 4px 14px;
+    border-radius: 20px; border: 1px solid #D4AF37;
+    margin-bottom: 24px;
+    font-family: "Playfair Display", serif;
+  }
+  .sidebar-info {
+    text-align: left;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    padding-top: 20px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .sidebar-info-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: #555;
+  }
+  .sidebar-info-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; }
+  .sidebar-logout {
+    display: block; margin-top: 24px; padding: 11px;
+    background: #fff; border: 1.5px solid #e0e0e0;
+    border-radius: 10px; font-size: 15px; color: #c0392b;
+    text-decoration: none; transition: background 0.2s, border-color 0.2s;
+    font-family: "Inter", sans-serif;
+  }
+  .sidebar-logout:hover { background: #fdf0f0; border-color: #c0392b; }
+
+  /* MAIN */
+  .account-main { display: flex; flex-direction: column; gap: 24px; }
+  .account-panel {
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08); padding: 32px;
+  }
+  .panel-title {
+    font-family: "Playfair Display", serif; font-size: 22px;
+    margin-bottom: 24px; padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.07); color: #0f0f0f;
+  }
+  .field-group {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 18px; margin-bottom: 18px;
+  }
+  .field-group.single { grid-template-columns: 1fr; }
+  @media (max-width: 500px) { .field-group { grid-template-columns: 1fr; } }
+  .field label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: #888; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%; padding: 11px 14px; font-size: 15px;
+    border-radius: 10px; border: 1.5px solid rgba(0,0,0,0.12);
+    font-family: "Inter", sans-serif; color: #0f0f0f;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #fafafa;
+  }
+  .field input:focus {
+    border-color: #D4AF37; outline: none;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.15); background: #fff;
+  }
+  .field input[readonly] { background: #f5f5f5; color: #aaa; cursor: not-allowed; }
+  .btn-save {
+    padding: 12px 28px; background: #D4AF37; color: #fff;
+    border: none; border-radius: 10px; font-size: 15px;
+    font-family: "Inter", sans-serif; cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(212,175,55,0.35); }
+  .member-banner {
+    background: linear-gradient(135deg, #FEF8DE, #fff8e1);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 14px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .member-banner svg { width: 36px; height: 36px; flex-shrink: 0; }
+  .member-banner-text h4 {
+    font-family: "Playfair Display", serif;
+    font-size: 17px; margin-bottom: 3px; color: #0f0f0f;
+  }
+  .member-banner-text p { font-size: 14px; color: #888; }
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+    <nav class="wc-nav">
+      <ul>
+        <li><a href="{{ url_for('catalog') }}">Catalog</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li class="active">My Account</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="account-page">
+
+    <!-- SIDEBAR -->
+    <aside class="account-sidebar">
+      <form action="{{ url_for('account') }}" method="POST" enctype="multipart/form-data" id="avatarForm">
+        <input type="hidden" name="action" value="avatar">
+        <input type="file" name="avatar" id="avatarInput" accept="image/*">
+        <div class="avatar-wrap">
+          <img id="avatarPreview"
+            src="{{ url_for('static', filename=user['avatar']) if user['avatar'] else url_for('static', filename='images/account_icon.svg') }}"
+            alt="Profile Photo">
+          <label class="avatar-edit-btn" for="avatarInput" title="Change photo">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm17.71-10.21a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+          </label>
+        </div>
+      </form>
+
+      <div class="sidebar-name">{{ user['name'] }}</div>
+      <div class="sidebar-email">{{ user['email'] }}</div>
+      <div class="sidebar-badge">✦ AUREALBA Member</div>
+
+      <div class="sidebar-info">
+        {% if user['phone'] %}
+        <div class="sidebar-info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.45 2.33.7 3.58.7a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.25 2.45.7 3.58a1 1 0 0 1-.24 1.01l-2.34 2.2z"/></svg>
+          {{ user['phone'] }}
+        </div>
+        {% endif %}
+        {% if user['location'] %}
+        <div class="sidebar-info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          {{ user['location'] }}
+        </div>
+        {% endif %}
+        <div class="sidebar-info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          Member since {{ user['created'][:10] }}
+        </div>
+      </div>
+
+      <a href="{{ url_for('logout') }}" class="sidebar-logout">← Logout</a>
+    </aside>
+
+    <!-- MAIN PANELS -->
+    <div class="account-main">
+
+      <!-- Welcome banner -->
+      <div class="member-banner">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#FEF8DE" stroke="#D4AF37" stroke-width="1.5"/>
+          <path d="M12 6l1.5 3.5H17l-2.8 2 1.1 3.5L12 13l-3.3 2 1.1-3.5L7 9.5h3.5L12 6z" fill="#D4AF37"/>
+        </svg>
+        <div class="member-banner-text">
+          <h4>Welcome back, {{ user['name'].split()[0] }}!</h4>
+          <p>You're a valued AUREALBA member. Explore our latest collections.</p>
+        </div>
+      </div>
+
+      <!-- Profile info -->
+      <div class="account-panel">
+        <h3 class="panel-title">Personal Information</h3>
+        <form action="{{ url_for('account') }}" method="POST">
+          <input type="hidden" name="action" value="profile">
+          <div class="field-group">
+            <div class="field">
+              <label>Full Name</label>
+              <input type="text" name="name" value="{{ user['name'] }}" required>
+            </div>
+            <div class="field">
+              <label>Email Address</label>
+              <input type="email" value="{{ user['email'] }}" readonly>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" value="{{ user['phone'] or '' }}" placeholder="+94 7XX XXX XXX">
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input type="text" name="location" value="{{ user['location'] or '' }}" placeholder="City, Country">
+            </div>
+          </div>
+          <button type="submit" class="btn-save">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- Change password -->
+      <div class="account-panel">
+        <h3 class="panel-title">Change Password</h3>
+        <form action="{{ url_for('account') }}" method="POST">
+          <input type="hidden" name="action" value="password">
+          <div class="field-group single">
+            <div class="field">
+              <label>Current Password</label>
+              <input type="password" name="current_password" placeholder="Enter current password" required>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label>New Password</label>
+              <input type="password" name="new_password" placeholder="Min. 6 characters" required>
+            </div>
+            <div class="field">
+              <label>Confirm New Password</label>
+              <input type="password" name="confirm_password" placeholder="Repeat new password" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-save">Update Password</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.getElementById("avatarInput").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => { document.getElementById("avatarPreview").src = e.target.result; };
+    reader.readAsDataURL(file);
+    document.getElementById("avatarForm").submit();
+  });
+</script>
+{% endblock %}

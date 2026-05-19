@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}AUREALBA — Elegance Redefined{% endblock %}
+
+{% block splash %}
+<div id="splash">AUREALBA</div>
+{% endblock %}
+
+{% block body %}
+<div id="main-content">
+
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
+
+    <nav class="navbar">
+      <div class="dropdown">
+        <a class="catalog" href="#">Catalog</a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('office') }}">Office Attire</a></li>
+          <li><a href="{{ url_for('casual') }}">Casual Wear</a></li>
+          <li><a href="{{ url_for('party') }}">Party Wear</a></li>
+          <li><a href="{{ url_for('traditional') }}">Traditional Wear</a></li>
+        </ul>
+      </div>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+
+      <div class="searchbox">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <div id="searchResults" class="search-results"></div>
+      </div>
+
+      <div class="user-dropdown">
+        <a href="#" class="nav-user-icon">
+          <img src="{{ url_for('static', filename='images/account_icon.svg') }}" alt="User">
+        </a>
+        <ul class="user-menu">
+          {% if session.user_id %}
+            <li><a href="{{ url_for('account') }}">My Account</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <h1 class="collections-title fade-up">Collections</h1>
+
+  <div class="collections-grid">
+    <a href="{{ url_for('casual') }}" class="card">
+      <div class="imgwrap">
+        <img src="{{ url_for('static', filename='images/casual.webp') }}" alt="Casual">
+        <div class="overlay">Casual Wear</div>
+      </div>
+    </a>
+    <a href="{{ url_for('party') }}" class="card">
+      <div class="imgwrap">
+        <img src="{{ url_for('static', filename='images/party.jpg') }}" alt="Party">
+        <div class="overlay">Party Wear</div>
+      </div>
+    </a>
+    <a href="{{ url_for('office') }}" class="card">
+      <div class="imgwrap">
+        <img src="{{ url_for('static', filename='images/office.jpg') }}" alt="Office">
+        <div class="overlay">Office Wear</div>
+      </div>
+    </a>
+    <a href="{{ url_for('traditional') }}" class="card">
+      <div class="imgwrap">
+        <img src="{{ url_for('static', filename='images/traditional.jpeg') }}" alt="Traditional">
+        <div class="overlay">Traditional Wear</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ── SPLASH ── */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Playfair Display", serif;
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  background: linear-gradient(120deg, #b8860b, #ffd700, #b8860b);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldSweep 2s ease-in-out infinite;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#splash.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+@keyframes goldSweep {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ── MAIN CONTENT ── */
+#main-content {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+#main-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='navbar.js') }}"></script>
+{% endblock %}
