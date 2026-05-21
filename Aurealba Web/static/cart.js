@@ -32,7 +32,7 @@ function renderCartPanel() {
   const footerEl = document.getElementById('cart-panel-footer');
 
   if (!cart.length) {
-    itemsEl.innerHTML = '<div style="text-align:center;padding:60px 20px;color:#8C7E68;"><p style="font-size:15px">Your cart is empty</p></div>';
+    itemsEl.innerHTML = '<div style="text-align:center;padding:60px 20px;color:#8C7E68;"><img src="/static/images/cart.png" style="width:52px;opacity:0.4;margin-bottom:12px"><p style="font-size:15px">Your cart is empty</p></div>';
     footerEl.style.display = 'none';
     return;
   }

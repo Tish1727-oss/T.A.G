@@ -11,8 +11,15 @@
   {% block extra_css %}{% endblock %}
 </head>
 <body>
-<div id="page-transition"><span id="transition-logo">AUREALBA</span></div>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition">
+  <span id="transition-logo">AUREALBA</span>
+</div>
+
 {% block splash %}{% endblock %}
+
+<!-- Flash Messages -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <div class="flash-container">
@@ -22,7 +29,10 @@
     </div>
   {% endif %}
 {% endwith %}
+
 {% block body %}{% endblock %}
+
+<!-- FOOTER -->
 <div class="footer-section">
   <div class="footer-grid">
     <div class="footer-column">
@@ -42,7 +52,7 @@
     </div>
     <div class="footer-column">
       <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:contact@tagfashion.com">contact@tagfashion.com</a></p>
+      <p>Email: <a href="/cdn-cgi/l/email-protection#d6b5b9b8a2b7b5a296a2b7b1b0b7a5bebfb9b8f8b5b9bb"><span class="__cf_email__" data-cfemail="e784888993868493a79386808186948f8e8889c984888a">[email&#160;protected]</span></a></p>
       <p>Phone: +94 705 312 382<br>+94 711 479 102</p>
       <p>Location: Colombo, Sri Lanka</p>
     </div>
@@ -57,11 +67,17 @@
   </div>
 </div>
 <footer><p>© 2025 AUREALBA | Crafted With Elegance</p></footer>
-<button class="cart-fab" onclick="toggleCart()">
-  <img src="{{ url_for('static', filename='images/cart.png') }}" style="width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(1);">
+
+<!-- FLOATING CART BUTTON -->
+<button class="cart-fab" onclick="toggleCart()" aria-label="Open cart">
+  🛒
   <span class="cart-badge" id="cart-badge" style="display:none">0</span>
 </button>
+
+<!-- CART OVERLAY -->
 <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+<!-- CART PANEL -->
 <div class="cart-panel" id="cart-panel">
   <div class="cart-panel-header">
     <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;">Your Cart</div>
@@ -76,15 +92,39 @@
     <a href="/checkout" class="cart-checkout-btn">Proceed to Checkout →</a>
   </div>
 </div>
+
 <style>
-.cart-fab{position:fixed;bottom:32px;right:32px;z-index:9000;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#8B6914,#C9A84C);color:white;font-size:22px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(201,168,76,0.45);display:flex;align-items:center;justify-content:center;}
-.cart-badge{position:absolute;top:-4px;right:-4px;background:#C45A5A;color:white;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid white;}
-.cart-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,0.45);z-index:9001;}
+.cart-fab {
+  position:fixed;bottom:32px;right:32px;z-index:9000;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#8B6914,#C9A84C);
+  color:white;font-size:22px;border:none;cursor:pointer;
+  box-shadow:0 6px 24px rgba(201,168,76,0.45);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.cart-fab:hover{transform:scale(1.08);box-shadow:0 10px 30px rgba(201,168,76,0.55);}
+.cart-badge {
+  position:absolute;top:-4px;right:-4px;
+  background:#C45A5A;color:white;
+  width:20px;height:20px;border-radius:50%;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid white;
+}
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,0.45);z-index:9001;backdrop-filter:blur(3px);}
 .cart-overlay.open{display:block;}
-.cart-panel{position:fixed;right:-420px;top:0;bottom:0;width:400px;max-width:95vw;background:white;z-index:9002;display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.15);transition:right 0.35s ease;}
+.cart-panel {
+  position:fixed;right:-420px;top:0;bottom:0;width:400px;max-width:95vw;
+  background:white;z-index:9002;display:flex;flex-direction:column;
+  box-shadow:-8px 0 40px rgba(0,0,0,0.15);
+  transition:right 0.35s cubic-bezier(0.4,0,0.2,1);
+  border-left:1px solid rgba(201,168,76,0.15);
+}
 .cart-panel.open{right:0;}
 .cart-panel-header{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(201,168,76,0.15);}
-.cart-close-btn{width:32px;height:32px;border-radius:50%;border:none;background:#F5EFD8;cursor:pointer;font-size:16px;color:#8C7E68;}
+.cart-close-btn{width:32px;height:32px;border-radius:50%;border:none;background:#F5EFD8;cursor:pointer;font-size:16px;color:#8C7E68;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.cart-close-btn:hover{background:#e8e0cc;}
 .cart-panel-items{flex:1;overflow-y:auto;padding:16px 24px;}
 .cp-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid rgba(201,168,76,0.1);}
 .cp-item:last-child{border-bottom:none;}
@@ -94,30 +134,30 @@
 .cp-item-meta{font-size:12px;color:#8C7E68;margin-top:2px;}
 .cp-item-price{font-family:"Playfair Display",serif;font-weight:700;font-size:15px;color:#8B6914;}
 .cp-qty{display:flex;align-items:center;gap:8px;margin-top:6px;}
-.cp-qty-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.35);background:#FDFAF3;cursor:pointer;font-size:14px;font-weight:700;color:#8B6914;}
-.cp-qty-btn:hover{background:#C9A84C;color:white;}
+.cp-qty-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.35);background:#FDFAF3;cursor:pointer;font-size:14px;font-weight:700;color:#8B6914;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.cp-qty-btn:hover{background:#C9A84C;color:white;border-color:#C9A84C;}
 .cart-panel-footer{padding:16px 24px 28px;border-top:1px solid rgba(201,168,76,0.15);}
 .cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding:12px 0;}
-.cart-checkout-btn{display:block;text-align:center;padding:14px 24px;background:linear-gradient(135deg,#8B6914,#C9A84C);color:white;text-decoration:none;border-radius:30px;font-weight:700;font-size:15px;}
+.cart-checkout-btn{display:block;text-align:center;padding:14px 24px;background:linear-gradient(135deg,#8B6914,#C9A84C);color:white;text-decoration:none;border-radius:30px;font-weight:700;font-size:15px;box-shadow:0 4px 14px rgba(201,168,76,0.35);transition:transform 0.2s,box-shadow 0.2s;}
+.cart-checkout-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.45);}
+/* PRODUCT GRID */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;max-width:1200px;margin:0 auto 80px;padding:0 40px;}
-.product-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(201,168,76,0.12);transition:transform 0.25s;}
-.product-card:hover{transform:translateY(-6px);}
+.product-card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(201,168,76,0.12);transition:transform 0.25s,box-shadow 0.25s;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.13);}
 .product-emoji{height:180px;background:linear-gradient(135deg,#F5EFD8,#FEF8DE);display:flex;align-items:center;justify-content:center;font-size:64px;}
 .product-info{padding:18px 20px 22px;}
 .product-name{font-family:"Playfair Display",serif;font-size:17px;font-weight:700;color:#1A1510;margin-bottom:4px;}
 .product-collection{font-size:12px;color:#8C7E68;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;}
 .product-price{font-family:"Playfair Display",serif;font-size:20px;font-weight:700;color:#8B6914;margin-bottom:14px;}
 .size-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
-.size-btn{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid rgba(201,168,76,0.3);background:#FDFAF3;color:#5C4A1A;cursor:pointer;}
+.size-btn{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid rgba(201,168,76,0.3);background:#FDFAF3;color:#5C4A1A;cursor:pointer;transition:all 0.15s;}
+.size-btn:hover{border-color:#C9A84C;background:#F5EFD8;}
 .size-btn.active{background:#1A1510;color:#F0D080;border-color:#1A1510;}
-.atc-btn{width:100%;padding:11px 16px;border-radius:30px;background:linear-gradient(135deg,#8B6914,#C9A84C);color:white;font-weight:700;font-size:14px;border:none;cursor:pointer;}
+.atc-btn{width:100%;padding:11px 16px;border-radius:30px;background:linear-gradient(135deg,#8B6914,#C9A84C);color:white;font-weight:700;font-size:14px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(201,168,76,0.3);transition:all 0.2s;}
+.atc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,0.4);}
 .size-row.shake{animation:shake 0.4s ease;}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 @keyframes toastSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.theme-toggle,#themeToggle{display:none!important;}
 </style>
-<script src="{{ url_for('static', filename='cart.js') }}"></script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-{% block extra_js %}{% endblock %}
-</body>
-</html>
+
+<script data-cfasync="false" src="/cdn-cgi/scrip
