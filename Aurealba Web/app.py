@@ -5,7 +5,7 @@ from functools import wraps
 import sqlite3
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 app.secret_key = os.environ.get("SECRET_KEY", "aurealba-secret-key-change-in-production")
 
 UPLOAD_FOLDER      = os.path.join("static", "uploads", "avatars")
