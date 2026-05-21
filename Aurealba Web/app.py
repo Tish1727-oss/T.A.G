@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
@@ -6,6 +6,10 @@ import sqlite3
 import os
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
+
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('static', filename)
 app.secret_key = os.environ.get("SECRET_KEY", "aurealba-secret-key-change-in-production")
 
 UPLOAD_FOLDER      = os.path.join("static", "uploads", "avatars")
