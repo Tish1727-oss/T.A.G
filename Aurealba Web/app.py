@@ -6,10 +6,12 @@ import sqlite3
 import os
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
+app.config['APPLICATION_ROOT'] = '/'
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 @app.route('/static/<path:filename>')
 def static_files(filename):
-    return send_from_directory('static', filename)
+    return send_from_directory(os.path.join(os.path.dirname(__file__), 'static'), filename)
 app.secret_key = os.environ.get("SECRET_KEY", "aurealba-secret-key-change-in-production")
 
 UPLOAD_FOLDER      = os.path.join("static", "uploads", "avatars")
