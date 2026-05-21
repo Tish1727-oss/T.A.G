@@ -1,9 +1,40 @@
 {% extends "base.html" %}
 {% block title %}Party Wear — AUREALBA{% endblock %}
 {% block body %}
-<header class="wc-header">
-  <a href="{{ url_for('index') }}" class="wc-logo">AUREALBA</a>
-</header>
+  <header class="wc-header">
+    <a href="{{ url_for('index') }}" class="wc-logo"><img src="{{ url_for('static', filename='images/aurealba_logo.png') }}" alt="AUREALBA" style="height:38px;object-fit:contain;"></a>
+    <nav class="navbar">
+      <div class="dropdown">
+        <a class="catalog" href="#">Catalog</a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('office') }}">Office Attire</a></li>
+          <li><a href="{{ url_for('casual') }}">Casual Wear</a></li>
+          <li><a href="{{ url_for('party') }}">Party Wear</a></li>
+          <li><a href="{{ url_for('traditional') }}">Traditional Wear</a></li>
+        </ul>
+      </div>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <div class="searchbox">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <div id="searchResults" class="search-results"></div>
+      </div>
+      <div class="user-dropdown">
+        <a href="#" class="nav-user-icon">
+          <img src="{{ url_for('static', filename='images/account_icon.svg') }}" alt="User">
+        </a>
+        <ul class="user-menu">
+          {% if session.user_id %}
+            <li><a href="{{ url_for('account') }}">My Account</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </header>
 <h1 class="collections-title">Party Wear</h1>
 <div class="detail-hero">
   <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="Party Wear">
@@ -30,4 +61,5 @@ const PRODUCTS = [
 ];
 </script>
 <script src="{{ url_for('static', filename='collection.js') }}"></script>
+<script src="{{ url_for('static', filename='navbar.js') }}"></script>
 {% endblock %}
