@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Aurealba | Thank You</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      min-height:100vh;
+      background:
+      linear-gradient(
+      135deg,
+      #f8f6f2 0%,
+      #efe9df 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow-x:hidden;
+      position:relative;
+      padding:30px;
+    }
+
+    /* BACKGROUND GLOW */
+
+    .bg1,
+    .bg2{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(120px);
+      z-index:0;
+    }
+
+    .bg1{
+      width:450px;
+      height:450px;
+      background:#c9972b20;
+      top:-150px;
+      right:-100px;
+    }
+
+    .bg2{
+      width:350px;
+      height:350px;
+      background:#c9972b15;
+      bottom:-120px;
+      left:-100px;
+    }
+
+    /* MAIN CONTAINER */
+
+    .container{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width:1100px;
+      background:rgba(255,255,255,0.80);
+      backdrop-filter:blur(18px);
+      border-radius:36px;
+      overflow:hidden;
+      box-shadow:
+      0 25px 60px rgba(0,0,0,0.08);
+      border:1px solid rgba(255,255,255,0.6);
+    }
+
+    /* TOP GOLD LINE */
+
+    .top-line{
+      width:100%;
+      height:5px;
+      background:
+      linear-gradient(
+      90deg,
+      #b88321,
+      #d8b05d,
+      #b88321);
+    }
+
+    /* CONTENT */
+
+    .content{
+      padding:70px 90px;
+      text-align:center;
+      position:relative;
+    }
+
+    /* GLOW EFFECT */
+
+    .glow{
+      position:absolute;
+      width:280px;
+      height:280px;
+      background:#c9972b18;
+      border-radius:50%;
+      filter:blur(70px);
+      left:-70px;
+      top:10px;
+    }
+
+    /* LOGO */
+
+    .logo{
+      width:260px;
+      margin-top:-20px;
+      margin-bottom:20px;
+      opacity:1;
+    }
+
+    /* TITLE */
+
+    h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:82px;
+      font-weight:600;
+      color:#b88321;
+      margin-bottom:20px;
+      letter-spacing:1px;
+    }
+
+    /* SUBTITLE */
+
+    .subtitle{
+      max-width:720px;
+      margin:auto;
+      color:#5d5d5d;
+      font-size:18px;
+      line-height:1.9;
+      font-weight:400;
+    }
+
+    /* MESSAGE BOX */
+
+    .message-card{
+      margin-top:55px;
+      background:rgba(255,255,255,0.85);
+      border:1px solid rgba(201,151,43,0.15);
+      border-radius:30px;
+      padding:50px;
+      box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.8),
+      0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .message{
+      max-width:760px;
+      margin:auto;
+      font-size:17px;
+      line-height:2;
+      color:#555;
+      font-weight:400;
+    }
+
+    .highlight{
+      color:#b88321;
+      font-weight:600;
+    }
+
+    /* SIGNATURE */
+
+    .signature{
+      margin-top:45px;
+    }
+
+    .signature h2{
+      font-family:'Cormorant Garamond',serif;
+      font-size:34px;
+      color:#b88321;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    .signature p{
+      color:#777;
+      letter-spacing:2px;
+      font-size:13px;
+      text-transform:uppercase;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top:55px;
+      display:flex;
+      justify-content:center;
+      gap:35px;
+      flex-wrap:wrap;
+      font-size:13px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#8a8a8a;
+    }
+
+    .footer span{
+      position:relative;
+    }
+
+    .footer span::after{
+      content:"";
+      position:absolute;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#c9972b;
+      right:-21px;
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+    .footer span:last-child::after{
+      display:none;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      .content{
+        padding:60px 35px;
+      }
+
+      h1{
+        font-size:58px;
+      }
+
+      .logo{
+        width:220px;
+      }
+
+      .message-card{
+        padding:35px 25px;
+      }
+
+      .message{
+        font-size:16px;
+      }
+
+    }
+
+    @media(max-width:500px){
+
+      body{
+        padding:15px;
+      }
+
+      h1{
+        font-size:44px;
+      }
+
+      .subtitle{
+        font-size:15px;
+      }
+
+      .message{
+        font-size:15px;
+        line-height:1.9;
+      }
+
+      .footer{
+        gap:18px;
+      }
+
+      .logo{
+        width:190px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg1"></div>
+  <div class="bg2"></div>
+
+  <!-- MAIN CARD -->
+  <div class="container">
+
+    <div class="top-line"></div>
+
+    <div class="content">
+
+      <div class="glow"></div>
+
+      <!-- LOGO -->
+      <img src="./Aurealba Logo.png" alt="Aurealba Logo" class="logo">
+
+      <!-- TITLE -->
+      <h1>Thank You</h1>
+
+      <!-- SUBTITLE -->
+      <p class="subtitle">
+        Your purchase is more than an order to us —
+        it is a reflection of trust, elegance, and support.
+        We are truly honoured to welcome you to the Aurealba experience.
+      </p>
+
+      <!-- MESSAGE -->
+      <div class="message-card">
+
+        <p class="message">
+
+          Thank you for choosing
+          <span class="highlight">Aurealba</span>.
+
+          Every piece we create is designed with sophistication,
+          confidence, and timeless elegance in mind.
+          Your support allows us to continue delivering premium fashion experiences crafted with exceptional attention to detail.
+
+          <br><br>
+
+          We sincerely appreciate the confidence you have placed in our brand and we hope your order brings you both comfort and confidence.
+
+          <br><br>
+
+          From all of us at Aurealba,
+          thank you for being part of our journey.
+          We look forward to serving you again soon.
+
+        </p>
+
+        <!-- SIGNATURE -->
+        <div class="signature">
+          <h2>With Gratitude</h2>
+          <p>Aurealba Team</p>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <span>Luxury</span>
+        <span>Elegance</span>
+        <span>Confidence</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
